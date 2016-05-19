@@ -5,9 +5,9 @@ import {
   Text,
   StyleSheet,
   Navigator,
-  StatusBarIOS,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 import TabBar from 'react-native-xtabbar';
@@ -20,17 +20,15 @@ import WebPage from './webPage';
 import Service from './service';
 import Utils from './utils';
 
+var i = 0;
+
 export default class Index extends Component {
 
   constructor(){
     super();
-    if(Platform.OS === 'ios'){
-      StatusBarIOS.setStyle('light-content');
-    }
   }
 
   renderScene(route, navigator) {
-
     return <route.component navigator={navigator}  {...route.passProps} />;
   }
 
@@ -39,6 +37,7 @@ export default class Index extends Component {
   }
 
   addNavigator(name,component){
+    
     return (
       <Navigator
         style={{flex:1}}

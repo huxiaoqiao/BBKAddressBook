@@ -18,69 +18,50 @@ import Item from './message/item';
 import Detail from './message/detail';
 import Service from './service';
 
+var i = 0;
 
 export default class Notice extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      data:{
-        status:0
-      }
+      data:{}
     }
   }
-
-  componentDidMount(){
-    var path = Service.host + Service.getMessage;
-    
+ 
+ componentDidMount(){
     var that = this;
-
-    Utils.post(path,{
-      key:Utils.key
-    },function(data) {
-
-      if(data.status){
-        
-        that.setState = {
-          data:data
-       }   
-        
-      }else{
-        Alert.alert('提示',data.data); 
-      }
-     
-    });    
-  }
-
+    var path = Service.host + Service.getMessage;
+    var that = this;
+    //请求消息数据
+    Utils.post(path, {
+      key: Utils.key
+    }, function(result){
+      that.setState({
+        data: result.data
+      }); 
+    });
+  } 
 
   render(){
-
     var contents = [];
-     var items = [];
-    if(this.state.data.status){
-      contents = this.state.data.data;
-      
-    }else
-    {
-      
+    var items = [];
+    if(this.state.data.length > 0){
+      contents = this.state.data;
+      for (var i = 0; i < contents.length;i ++){
+        items.push(
+          <Item
+            data={contents[i]}
+            nav={this.props.navigator}
+            component={Detail}
+            key={contents[i].messageid}
+            text={contents[i].message}
+            name={contents[i].username}
+            date={contents[i].time}/>
+        );
+      }
     }
-
-    for(var i = 0;i < contents.length; i++){
-      items.push(
-        <Item
-           data={contents[i]}
-           navigator={this.props.navigator}
-           component={Detail}
-           key={contents[i].messageid}
-           text={contents[i].message}
-           name={contents[i].username}
-           date={contents[i].time}
-         />
-      );
-    }
-
-
-
+    
     return (
       <ScrollView style={styles.container}>
         <View style={{height:50,padding:7,}}>
@@ -99,7 +80,7 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'#F5F5F5',
     flexDirection:'column',
-    marginBottom: 64
+    marginTop:64,
   },
   search:{
     height:35,

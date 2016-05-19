@@ -7,6 +7,7 @@ import React,{
     StyleSheet,
     Image,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 
 import Utils from '../utils';
@@ -15,14 +16,16 @@ import Service from '../service';
 export default class Item extends Component{
     
     _loadPage(data){
+        
+        
         var content = data;
-        this.props.navigator.push({
+        this.props.nav.push({
+            name: 'Detail',
             component: this.props.component,
             passProps: {
-              content:content,
-              title:'消息详情'
-            },
-            type: 'Normal'
+                content:content,
+                title:'消息详情'
+            }
         })
     }
     
