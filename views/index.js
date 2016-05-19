@@ -1,9 +1,9 @@
 
-import React,{
+import React,{Component} from 'react';
+import {
   View,
   Text,
   StyleSheet,
-  Component,
   Navigator,
   StatusBarIOS,
   Platform,
@@ -17,7 +17,8 @@ import Notice from './notice';
 import Living from './living';
 import Setting from './setting';
 import WebPage from './webPage';
-
+import Service from './service';
+import Utils from './utils';
 
 export default class Index extends Component {
 
@@ -29,6 +30,7 @@ export default class Index extends Component {
   }
 
   renderScene(route, navigator) {
+
     return <route.component navigator={navigator}  {...route.passProps} />;
   }
 
@@ -82,7 +84,7 @@ export default class Index extends Component {
                 },
                 // 标题
                 Title(route, navigator, index, navState) {
-                  
+
                   return (
                     <View style={styles.navContainer}>
                       <Text style={styles.title}>

@@ -21,7 +21,7 @@ export default class WebPage extends Component {
           contentInset={{top:64}}
           startInLoadingState={true}
           style={{flex:1}}
-          source={this.props.url}
+          url={this.props.url}
         />
       </View>
     );

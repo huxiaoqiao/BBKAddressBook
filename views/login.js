@@ -49,7 +49,7 @@ export default class Login extends Component{
    _getUsername(val){
      var username = val;
      this.setState({
-       email:email
+       username:username
      });
    }
 
@@ -68,42 +68,44 @@ export default class Login extends Component{
    _doLogin(){
      var username = this.state.username;
      var password = this.state.password;
+     
      var path = Service.host + Service.login;
      var that = this;
+     var deviceId = '12345678';
     //  var deviceId = DeviceInfo.getUniqueID();
-
-    //  //执行登录请求
-    //  if (deviceId) {
-    //    Utils.post(path,{
-    //      username:username,
-    //      password:password,
-    //      deviceId:deviceId,
-    //    },function(data){
-    //      if (data.status) {
-    //        var user = data.data;
-    //        //加入数据到本地
-    //        AsyncStorage.multiSet([
-    //          ['username',user.username],
-    //          ['token',user.token],
-    //          ['userid',user.userid],
-    //          ['email',user.email],
-    //          ['tel',user.tel],
-    //          ['partment',user.partment],
-    //          ['tag',user.tag],
-    //        ],function(err){
-    //          if(!err){
-    //            that.setState({
-    //              isLoggedIn:true,
-    //              modalVisible:false,
-    //            });
-    //          }
-    //        });
-    //      }else {
-    //        Alert.alert('提示','用户名或密码错误');
-    //        that.setState({isLoggedIn:false});
-    //      }
-    //    });
-    //  }
+     //执行登录请求
+     if (deviceId) {
+       Utils.post(path,{
+         username:username,
+         password:password,
+         deviceId:deviceId,
+       },function(data){
+         if (data.status) {
+           var user = data.data;
+           //加入数据到本地
+           AsyncStorage.multiSet([
+             ['username',user.username],
+             ['token',user.token],
+             ['userid',user.userid],
+             ['email',user.email],
+             ['tel',user.tel],
+             ['partment',user.partment],
+             ['tag',user.tag],
+           ],function(err){
+             if(!err){
+               that.setState({
+                 isLoggedIn:true,
+                 modalVisible:false,
+               });
+             }
+           });
+           that.setState({isLoggedIn:true});
+         }else {
+           Alert.alert('提示',data.data,[{text:'确定'}]);
+           that.setState({isLoggedIn:false});
+         }
+       });
+     }
 
 
       //this.setState({isLoggedIn:true,modalVisible:false});
@@ -126,11 +128,13 @@ export default class Login extends Component{
                     <Image source={require('./pic/logo.png')} style={styles.logo}></Image>
                     <TextInput
                         style={styles.input}
-                        placeholder='用户名'
+                        placeholder='工号'
+                        onChangeText={(text)=>this._getUsername(text)}
                     ></TextInput>
                     <TextInput
                         style={styles.input}
                         placeholder='密码'
+                        onChangeText={(text)=>this._getPassword(text)}
                     >
                     </TextInput>
                     <TouchableOpacity

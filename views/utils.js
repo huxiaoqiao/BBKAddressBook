@@ -28,7 +28,7 @@ var Utils = {
       callback(responseData);
     });
   },
-  key: 'BDKHFSDKJFHSDKFHWEFH-REACT-NATIVE',
+  key: 'HSHHSGSGGSTWSYWSYUSUWSHWBS-REACT-NATIVE',
 };
 
 

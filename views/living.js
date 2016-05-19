@@ -8,6 +8,7 @@ import React,{
     Image,
     TouchableOpacity,
     Alert,
+    ScrollView,
   } from 'react-native';
 
 import Utils from './utils';
@@ -43,6 +44,7 @@ export default class Living extends Component {
 
   render(){
     return (
+      <ScrollView>
       <View style={styles.container}>
         <View style={styles.boxContainer}>
 
@@ -99,9 +101,8 @@ export default class Living extends Component {
             <Text style={styles.text}>号码百事通</Text>
           </View>
         </View>
-
-
       </View>
+      </ScrollView>
     );
   }
 }
