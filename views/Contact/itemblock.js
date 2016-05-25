@@ -9,19 +9,33 @@ import React,{
 } from 'react-native';
 
 import Utils from '../utils';
+import Contact_list from './contact_list';
 
 export default class ItemBlock extends Component {
+
+
+    _gotoListPage(title){
+      
+      this.props.nav.push({
+        component: Contact_list,
+        passProps: {
+          title: title
+        },
+        type: 'Normal'
+      })
+    }
+
     render(){
         var size = {
             width:parseInt(this.props.width),
             height:parseInt(this.props.width),
             backgroundColor:this.props.color,
         };
-        
+
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>this._gotoListPage(this.props.title)}>
                 <View style={[styles.itemBlock,size]}>
-                    <Text style={styles.font16}>{this.props.title}</Text>              
+                    <Text style={styles.font16}>{this.props.title}</Text>
                 </View>
             </TouchableOpacity>
         );
@@ -42,4 +56,3 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
 });
-

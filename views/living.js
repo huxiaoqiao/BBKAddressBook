@@ -30,7 +30,6 @@ export default class Living extends Component {
   }
 
 
-
   gotoWebView(title,url, type = 'Normal') {
   this.props.navigator.push({
     component: WebPage,
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'lightgray',
-    borderWidth: 0.5,
+    borderWidth: Utils.pixel,
   },
   icon:{
     width: 60,

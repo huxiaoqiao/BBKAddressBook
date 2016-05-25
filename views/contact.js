@@ -10,7 +10,7 @@ import React,{
 } from 'react-native';
 
 import Utils from './utils';
-import ItemBlock from './Contact/itemblock';
+import ItemBlock from './contact/itemblock';
 
 var WIDTH = Math.floor(((Utils.size.width -20) - 50) / 4);
 var ITEMS = [
@@ -22,26 +22,26 @@ var ITEMS = [
       title:'教育电子事业部',
       color:'#126AFF',
     }
-    
+
   ];
 
 export default class Contact extends Component {
-  
+
   render(){
     return (
       <ScrollView style={styles.container}>
         <View style={styles.itemRow}>
-            <ItemBlock 
+            <ItemBlock
               title={ITEMS[0].title}
               width={WIDTH}
               color={ITEMS[0].color}
-              nav={this.props.navgator}
+              nav={this.props.navigator}
             />
-            <ItemBlock 
+            <ItemBlock
               title={ITEMS[1].title}
               width={WIDTH}
               color={ITEMS[1].color}
-              nav={this.props.navgator}
+              nav={this.props.navigator}
             />
         </View>
       </ScrollView>
