@@ -6,23 +6,41 @@ import React,{
     View,
     StyleSheet,
     TouchableOpacity,
+    Alert,
 } from 'react-native';
 
 import Utils from '../utils';
 import Contact_list from './contact_list';
+import Service from '../service';
 
 export default class ItemBlock extends Component {
 
 
     _gotoListPage(title){
-      
-      this.props.nav.push({
-        component: Contact_list,
-        passProps: {
-          title: title
-        },
-        type: 'Normal'
-      })
+
+        var nav = this.props.nav;
+        var key = Utils.key;
+        var partment = this.props.title;
+        var path = Service.host + Service.getUser;
+
+
+        Utils.post(path,{
+            key: key,
+            partment: partment
+        },function(data){
+            if (data.status){
+                nav.push({
+                    component:Contact_list,
+                    passProps:{
+                        title:title,
+                        data:data
+                    },
+                    type:'Normal'
+                }).bind(this);
+            }
+
+        });
+
     }
 
     render(){

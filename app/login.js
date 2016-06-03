@@ -18,33 +18,46 @@ import React,{
 import Utils from './utils';
 import Index from './index';
 import Service from './service'
-//import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info';
 
 export default class Login extends Component{
 
-   constructor(props){
-       super(props);
-       this.state = {
-         modalVisible: true,
-         isLoggedIn: false,
-       };
-   }
+    // 构造
+      constructor(props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            modalVisible: true,
+            isLoggedIn: false,
+        };
+      }
 
-  //  componentDidMount(){
-  //    var that = this;
-  //    AsyncStorage.getItem('token',function(err,token){
-  //      if (!err && token){
-  //        var path = Service.host + Service.loginByToken;
-  //        Utils.post(path,{token:token},function(data){
-  //          if (data.status) {
-  //            that.setState({isLoggedIn:true});
-  //          }
-  //        });
-  //      }else {
-  //        that.setState({isLoggedIn:false});
-  //      }
-  //    });
-  //  }
+    componentWillMount() {
+        //var that = this;
+        //AsyncStorage.getItem('token',function(err,token){
+        //    if (!err && token){
+        //        var path = Service.host + Service.loginByToken;
+        //        Utils.post(path,{token:token},function(data){
+        //            if (data.status) {
+        //                that.setState({
+        //                    isLoggedIn:true,
+        //                    modalVisible:false,
+        //                });
+        //            }
+        //        });
+        //    }else {
+        //        that.setState({isLoggedIn:false});
+        //    }
+        //});
+    }
+
+
+    componentDidMount(){
+
+
+
+
+    }
 
    _getUsername(val){
      var username = val;
@@ -71,8 +84,7 @@ export default class Login extends Component{
      
      var path = Service.host + Service.login;
      var that = this;
-     var deviceId = '12345678';
-    //  var deviceId = DeviceInfo.getUniqueID();
+       var deviceId = DeviceInfo.getUniqueID();
      //执行登录请求
      if (deviceId) {
        Utils.post(path,{
@@ -90,7 +102,7 @@ export default class Login extends Component{
              ['email',user.email],
              ['tel',user.tel],
              ['partment',user.partment],
-             ['tag',user.tag],
+             ['position',user.position],
            ],function(err){
              if(!err){
                that.setState({
@@ -115,40 +127,43 @@ export default class Login extends Component{
         if(this.state.isLoggedIn)
         {
             return <Index />
-        }
-        return(
-          <Modal
-            animated={true}
-            transparent={true}
-            visible={this.state.modalVisible}
-            onRequestClose={()=>{this._setModalVisible(false)}}
-          >
-            <ScrollView style={styles.scrollView}>
-                <View style={styles.container}>
-                    <Image source={require('./pic/logo.png')} style={styles.logo}></Image>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='工号'
-                        onChangeText={(text)=>this._getUsername(text)}
-                    ></TextInput>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='密码'
-                        onChangeText={(text)=>this._getPassword(text)}
-                    >
-                    </TextInput>
-                    <TouchableOpacity
-                       onPress={()=>this._doLogin()}
-                    >
-                        <View style={styles.loginBtn}>
-                            <Text style={styles.loginText}>登录</Text>
+        }else {
+            return(
+                <Modal
+                    animated={true}
+                    transparent={true}
+                    visible={this.state.modalVisible}
+                    onRequestClose={()=>{this._setModalVisible(false)}}
+                >
+                    <ScrollView style={styles.scrollView}>
+                        <View style={styles.container}>
+                            <Image source={require('./pic/logo.png')} style={styles.logo}></Image>
+                            <TextInput
+                                style={styles.input}
+                                placeholder='工号'
+                                onChangeText={(text)=>this._getUsername(text)}
+                            ></TextInput>
+                            <TextInput
+                                style={styles.input}
+                                placeholder='密码'
+                                onChangeText={(text)=>this._getPassword(text)}
+                            >
+                            </TextInput>
+                            <TouchableOpacity
+                                onPress={()=>this._doLogin()}
+                            >
+                                <View style={styles.loginBtn}>
+                                    <Text style={styles.loginText}>登录</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
-          </Modal>
+                    </ScrollView>
+                </Modal>
+            );
 
-        );
+        }
+
+
     }
 }
 

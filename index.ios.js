@@ -12,10 +12,11 @@ import {
   View,
 } from 'react-native';
 
-import Index from './views/index';
-import Login from './views/login';
+import Index from './app/index';
+import Login from './app/login';
 
 class BBKAddressBook extends Component {
+
 
 
   render() {

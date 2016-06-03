@@ -11,19 +11,19 @@ import {
   View,
 } from 'react-native';
 
-import Index from './views/index';
-import Login from './views/login';
+import Index from './app/index';
+import Login from './app/login';
 
 class BBKAddressBook extends Component {
 
   render() {
       if(!this.props.isLoggedIn)
       {
-        return <Login />;       
+        return <Login />;
       }
       return <Index />
     }
-    
+
   }
 
 AppRegistry.registerComponent('BBKAddressBook', () => BBKAddressBook);

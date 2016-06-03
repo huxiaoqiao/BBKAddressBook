@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   Alert,
+    StatusBarIOS
 } from 'react-native';
 
 import TabBar from 'react-native-xtabbar';
@@ -22,11 +23,14 @@ import Utils from './utils';
 
 var i = 0;
 
+StatusBarIOS.setStyle('light-content');
+
 export default class Index extends Component {
 
   constructor(){
     super();
   }
+
 
   renderScene(route, navigator) {
     return <route.component navigator={navigator}  {...route.passProps} />;
@@ -120,7 +124,7 @@ export default class Index extends Component {
 
               <TabBar.Item
                   icon={require('./pic/icon_tab_Dial.png')}
-                  selectedIcon={require('./pic/icon_tab_Dia_selected.png')}
+                  selectedIcon={require('./pic/icon_tab_Dial_selected.png')}
                   title='自助服务'>
                   {this.addNavigator('自助服务',Living)}
               </TabBar.Item>
@@ -160,6 +164,6 @@ const styles = StyleSheet.create({
        leftNavButtonText:{
          color: 'white',
           fontSize: 16,
-          marginLeft: 13
+          marginLeft: 13,
        }
 });

@@ -105,14 +105,14 @@ var User = {
   //用户登录
   login: function(req, res){
     var username = req.param('username');
-    //var password = util.md5(req.param('password'));
-    var password = req.param('password');
+    var password = util.md5(req.param('password'));
+    //var password = req.param('password');
     var deviceId = req.param('deviceId');
     var token = util.guid() + deviceId;
     var content = JSON.parse(fs.readFileSync(USER_PATH).toString());
     for(var i in content){
       //验证通过
-      if(content[i].username === username && content[i].password === password){
+        if(content[i].username === username && content[i].password === password){
         content[i]['token'] = token;
         //写入到文件中
         console.log(content[i]);
@@ -124,8 +124,8 @@ var User = {
           data: content[i]
         });
       }
-    }
-
+     }
+      
     return res.send({
       status: 0,
       data:'用户名或者密码错误'

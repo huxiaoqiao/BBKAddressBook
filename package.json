@@ -8,6 +8,8 @@
   "dependencies": {
     "react": "^0.14.8",
     "react-native": "^0.25.1",
+    "react-native-actionsheet": "^2.0.1",
+    "react-native-device-info": "^0.9.3",
     "react-native-xtabbar": "^0.1.8"
   }
 }
